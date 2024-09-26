@@ -1,3 +1,4 @@
+
 # Axios JWT Refresh
 
 Simple npm package that lets you refresh your access token with axios Interceptor. Simple and Elegant.
@@ -14,13 +15,12 @@ Simple npm package that lets you refresh your access token with axios Intercepto
 
 ### Define Storage Object:
 
-Basically this storage object is used by `axios-jet-refresh` to store, retrive and update the tokens for api calls. If you're using typescript, consider creating a `Storage` object from ``IStorage`` type at ``axios-jwt-refresh/types``
+Basically, this storage object is used by `axios-jwt-refresh` to store, retrieve, and update the tokens for API calls. If you're using TypeScript, consider creating a `Storage` object from ``IStorage`` type at ``axios-jwt-refresh/types``
 
 **Storage Object**
 
 ```js
 import {IStorage} from 'axios-jwt-refresh/types'
-
 
 const Storage: IStorage  = {
     setTokens: (tokens) => {
@@ -48,25 +48,16 @@ const Storage: IStorage  = {
 
 ## API Client
 
+**requestInterceptor** accepts the following params:
 
-**requestInterceptor** accepts following params:
-
-- ``axiosInstance`` : actual axios instance.
-
-- ``tokenStorage`` : token storage class. Method signature is as above. It must be of type: ``IStorage``
-
-- ``onTokenSuccess`` : called when new token request succeds. ``axiosConfig, accessToken`` in a callback params.
-
-- ``onTokenFailure`` : called when new token request fails. ``tokenStorage, axiosConfig`` in a callback params.
-
-- ``getNewToken`` : async function that handles getting new token with `refreshToken`. Note that this mustn't be the call from ``axiosInstance`` to prevent the request looping.
-
-- ``expiryKey`` expiry key in token payload, you can check the decoded token right [here](https://jwt.io/). If unset, default value is `exp`
-
-- ``authHeaderName`` auth header to use for subscequent request, if unset default value is``Authorization``
-
-- ``tokenPrefix`` token prefix string, if unset default value is ``Bearer``
-
+- ``axiosInstance``: actual axios instance.
+- ``tokenStorage``: token storage class. The method signature is as above. It must be of type: ``IStorage``
+- ``onTokenSuccess``: called when the new token request succeeds. ``axiosConfig, accessToken`` are callback params.
+- ``onTokenFailure``: called when the new token request fails. ``tokenStorage, axiosConfig`` are callback params.
+- ``getNewToken``: async function that handles getting a new token with `refreshToken`. Note that this mustn't be the call from ``axiosInstance`` to prevent the request looping.
+- ``expiryKey``: expiry key in token payload. You can check the decoded token right [here](https://jwt.io/). If unset, the default value is `exp`.
+- ``authHeaderName``: auth header to use for subsequent requests. If unset, the default value is``Authorization``.
+- ``tokenPrefix``: token prefix string. If unset, the default value is ``Bearer``.
 
 ```js
 import axios from 'axios';
@@ -79,13 +70,12 @@ const api = axios.create({
     baseURL: API_URL
 })
 
-
 requestInterceptor({
     axiosInstance: api, // axios instance
-    tokenStorage: Storage, // youe prefered storage, IStorage type.
+    tokenStorage: Storage, // your preferred storage, IStorage type
     expiryKey: "exp", // default, optional
     authHeaderName: "Authorization", // default, optional
-    tokenPrefix: "Bearer", // defauly, optional
+    tokenPrefix: "Bearer", // default, optional
     getNewToken: async ({refreshToken}) => { // must be instantiated from axios to prevent infinite loop
         const resp = await axios.post(`${API_URL}/token/refresh/`, {
             "refresh": refreshToken
@@ -93,11 +83,11 @@ requestInterceptor({
         const token = resp.data.access
         return token
     },
-    onTokenFailure: ({tokenStorage, axiosConfig}) => { // called when refreshig token fails
+    onTokenFailure: ({tokenStorage, axiosConfig}) => { // called when refreshing token fails
         tokenStorage.removeTokens()
         window.location.reload()
     },
-    onTokenSuccess: ({axiosConfig, accessToken}) => { // called when obaining a token succeds
+    onTokenSuccess: ({axiosConfig, accessToken}) => { // called when obtaining a token succeeds
         console.log("Token successfully updated")
     
         if(axiosConfig.url == "/token/verify/" && accessToken){
@@ -107,7 +97,6 @@ requestInterceptor({
         }
     }
 })
-
 
 export default api;
 ```
