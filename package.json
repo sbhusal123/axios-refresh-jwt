@@ -1,6 +1,6 @@
 {
   "name": "axios-refresh-jwt",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Axios Request Interceptor to Refresh The JWT access token.",
   "main": "index.ts",
   "repository": {
