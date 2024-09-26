@@ -1,9 +1,4 @@
-import {IStorage, IRequestInterceptor} from './src/types'
+import {requestInterceptor} from './axios-jwt-refresh/utils'
 
-import {requestInterceptor} from './src/utils'
 
-export {
-    IStorage,
-    IRequestInterceptor,
-    requestInterceptor
-}
+export default requestInterceptor

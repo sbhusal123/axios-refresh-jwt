@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-import {requestInterceptor} from './index'
+import requestInterceptor from './axios-jwt-refresh'
 
-import { IStorage }from './index'
+import {IStorage} from './axios-jwt-refresh/types'
 
 const ACCESS_TOKEN = "@accessToken"
 const REFRESH_TOKEN = "@refreshToken"
@@ -30,8 +30,8 @@ const Storage: IStorage  = {
 
     getTokens: () => {
         return {
-            accessToken: localStorage.getItem(ACCESS_TOKEN) || "",
-            refreshToken: localStorage.getItem(REFRESH_TOKEN) || "",
+            accessToken: localStorage.getItem(ACCESS_TOKEN),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN)
         }
     }
 }

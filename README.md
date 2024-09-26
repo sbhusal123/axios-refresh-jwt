@@ -7,12 +7,14 @@ Simple npm package that lets you refresh your access token with axios Intercepto
 ```js
 import axios from 'axios';
 
-import {requestInterceptor} from './index'
+import requestInterceptor from 'axios-jwt-refresh'
 
-import { IStorage }from './index'
+import {IStorage} from 'axios-jwt-refresh/types'
 
+const ACCESS_TOKEN = "@accessToken"
+const REFRESH_TOKEN = "@refreshToken"
 
-const API_URL = "http://foo.bar"
+const API_URL = "http://foo.bar/api"
 
 const api = axios.create({
     baseURL: API_URL
@@ -35,8 +37,8 @@ const Storage: IStorage  = {
 
     getTokens: () => {
         return {
-            accessToken: localStorage.getItem(ACCESS_TOKEN) || "",
-            refreshToken: localStorage.getItem(REFRESH_TOKEN) || "",
+            accessToken: localStorage.getItem(ACCESS_TOKEN),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN)
         }
     }
 }
