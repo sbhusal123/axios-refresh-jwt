@@ -1,0 +1,29 @@
+{
+  "name": "axios-refresh-jwt",
+  "version": "1.0.0",
+  "description": "Axios Request Interceptor to Refresh The JWT access token.",
+  "main": "index.ts",
+  "repository": {
+    "url": "https://github.com/sbhusal123/axios-refresh-jwt.git",
+    "type": "git"
+  },
+  "scripts": {
+    "test": ""
+  },
+  "keywords": [
+    "jwt",
+    "axios",
+    "refresh"
+  ],
+  "author": "Surya Bhusal",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.5.5",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "dayjs": "^1.11.13",
+    "jwt-decode": "^4.0.0"
+  }
+}
