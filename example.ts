@@ -4,8 +4,6 @@ import requestInterceptor from './axios-jwt-refresh'
 
 import {IStorage} from './axios-jwt-refresh/types'
 
-const ACCESS_TOKEN = "@accessToken"
-const REFRESH_TOKEN = "@refreshToken"
 
 const API_URL = "http://localhost:8000/api"
 
@@ -15,23 +13,23 @@ const api = axios.create({
 
 const Storage: IStorage  = {
     setTokens: (tokens) => {
-        localStorage.setItem(ACCESS_TOKEN, tokens.accessToken)
-        localStorage.setItem(REFRESH_TOKEN, tokens.refreshToken)
+        localStorage.setItem("ACCESS_TOKEN", tokens.accessToken)
+        localStorage.setItem("REFRESH_TOKEN", tokens.refreshToken)
     },
 
     updateAccessToken: ({accessToken}) => {
-        localStorage.setItem(ACCESS_TOKEN, accessToken)
+        localStorage.setItem("ACCESS_TOKEN", accessToken)
     },
 
     removeTokens: () => {
-        localStorage.removeItem(ACCESS_TOKEN)
-        localStorage.removeItem(REFRESH_TOKEN)
+        localStorage.removeItem("ACCESS_TOKEN")
+        localStorage.removeItem("REFRESH_TOKEN")
     },
 
     getTokens: () => {
         return {
-            accessToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+            accessToken: localStorage.getItem("ACCESS_TOKEN"),
+            refreshToken: localStorage.getItem("REFRESH_TOKEN")
         }
     }
 }
